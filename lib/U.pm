@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 package U;
-# ABSTRACT: UNIVERSAL::new shortcut for the command line
+# ABSTRACT: UNIVERSAL::new alias for the command line
 # VERSION
 
 use UNIVERSAL::new;

@@ -32,32 +32,38 @@ no warnings 'once';
 
 =head1 SYNOPSIS
 
-  $ perl -MU -we 'HTTP::Tiny->new->mirror(...)'
+  use UNIVERSAL::new;
+
+  my $object = HTTP::Tiny->new; # HTTP::Tiny gets loaded
 
 =head1 DESCRIPTION
 
-This module installs a universal C<new> method.  When called, it loads the
-invoking module like C<require> would.  If the module has a C<new> method,
-control is transfered to that method.
+This module installs a universal, fallback C<new> method.  When called, it
+loads the invoking module like C<require> would.  If the module has a C<new>
+method, control is transferred to that method.
 
-This is most useful for command line scripts when used via the L<U> shortcut:
-
-  # with -MU
+This is most useful for command line scripts via the L<U> alias:
 
   $ perl -MU -we 'HTTP::Tiny->new->mirror(...)'
 
-  # without -MU
+Otherwise, you wind up repeating your module name, and that's painful
+for a "one-liner":
 
   $ perl -MHTTP::Tiny -we 'HTTP::Tiny->new->mirror(...)'
 
+If the module is not installed or if it does not have a C<new> method,
+the usual exceptions are thrown.
+
+=head1 CAVEAT
+
 B<Warning>: Mucking with L<UNIVERSAL> is a potentially fragile, global hack
-that could have unintended consequences.  B<You should not use it in production
-unless you are willing to accept that risk.>
+that could have unintended consequences.  B<You should not use it in
+production unless you are willing to accept that risk.>
 
 =head1 SEE ALSO
 
 =for :list
-* L<http://neilb.org/reviews/module-loading.html|CPAN modules that (can) load other modules> by Neil Bowers
+* L<CPAN modules that (can) load other modules|http://neilb.org/reviews/module-loading.html> by Neil Bowers
 
 =cut
 
