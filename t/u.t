@@ -5,7 +5,7 @@ use lib 't/lib';
 
 use Test::More 0.96;
 
-use UNIVERSAL::new;
+use U;
 
 use LoadTest;
 
